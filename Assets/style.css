@@ -1,0 +1,8 @@
+html, body{ height: 100%; }
+#map { height: 100%; }
+
+/*.map { margin: 1rem; }*/
+
+i.show {
+    transform: rotate(180deg);
+}

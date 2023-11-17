@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Geocoder</title>
+    <link rel="icon" type="image/x-icon" href="../Assets/files/favicon-32x32.png">
+
+    <link rel="stylesheet" href="../Assets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="position-absolute top-0 end-0 mt-2 me-2">
+        <a href="../index.html" class="btn btn-outline-warning"><i class="fa-solid fa-house fa-sm pe-1"></i>Home</a>
+    </div>
+    <div class="z-1 position-absolute top-0 start-50 translate-middle-x text-center" id="info">
+        <p>Made by <a class="text-decoration-none" href="https://github.com/MiChiamoAlbi" target="_blank">MiChiamoAlbi</a></p>
+    </div>
+    <div class="container position-absolute top-50 start-50 translate-middle  overflow-auto">
+        <h1>Geocoder single query</h1>
+        <div class="row">
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="city" placeholder="Pecetto Torinese">
+            </div>
+            <div class="col-md-2 text-center">
+                <button type="button" class="btn btn-outline-success mt-2 mt-md-0" onclick="submitForm()">Send</button>
+            </div>
+        </div>
+        <div class="container pt-2"> <!-- visually-hidden -->
+            <table class="table">
+                <tbody id="citylist" class=""></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        let inputCity = document.getElementById("city");
+        inputCity.addEventListener("keypress", function(event){
+            if(event.keyCode === 13){
+                submitForm();
+            }
+        })
+
+        async function submitForm(){
+            let city = await apiCall(inputCity);
+            console.log(city);
+            await table(city);
+        }
+
+        async function apiCall(inputCity){
+            return city = await $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+inputCity.value);
+            await new Promise(r => setTimeout(r, 2000));
+        }
+
+        let divCity = document.getElementById("citylist");
+        function table(data){
+            let rows = divCity.querySelectorAll("tr");
+            if(rows.length>0){
+                rows.forEach((row) => {
+                    row.remove();
+                });
+            }
+            for (let i = 0; i < data.length; i++) {
+                    let rowDiv = document.createElement("tr");
+
+                    let cityIndex = document.createElement("td");
+                    cityIndex.innerText = i+1;
+                    cityIndex.setAttribute('scope', 'row');
+                    rowDiv.appendChild(cityIndex);
+
+                    let cityLink = document.createElement("td");
+                    cityLink.innerText = data[i].display_name;
+                    rowDiv.appendChild(cityLink);
+
+                    let cityClass = document.createElement("td");
+                    cityClass.innerText = data[i].addresstype;
+                    rowDiv.appendChild(cityClass);
+
+                    let latitude = document.createElement("td");
+                    latitude.innerText = data[i].lat;
+                    rowDiv.appendChild(latitude);
+
+                    let longitude = document.createElement("td");
+                    longitude.innerText = data[i].lon;
+                    rowDiv.appendChild(longitude);
+
+                    divCity.appendChild(rowDiv);
+                };
+        }
+    </script>
+</body>
+</html>

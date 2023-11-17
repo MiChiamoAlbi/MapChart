@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wiki</title>
+    <link rel="icon" type="image/x-icon" href="../Assets/files/favicon-32x32.png">
+
+    <link rel="stylesheet" href="../Assets/style.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="position-absolute top-0 end-0 mt-2 me-2">
+        <select id="langSelector" class="form-control-sm text-center" aria-label="Lang" onchange="if (this.value) userLang=this.value; changeLanguage()">
+            <option class="dropdown-item" value="it-IT">🇮🇹</option>
+            <option class="dropdown-item" value="en-EN">🇬🇧</option>
+        </select>
+        <a href="../index.html" class="btn btn-outline-warning mb-2"><i class="fa-solid fa-house fa-sm pe-1"></i>Home</a>
+    </div>
+    <div class="container mt-3">
+        <h1>Wiki page</h1>
+        <div class="row align-items-center">
+            <div class="col-md-6 order-last">
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">city</th>
+                        <th scope="col">prov</th>
+                        <th scope="col">reg</th>
+                        <th scope="col">index</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Agrigento</th>
+                            <td>AG</td>
+                            <td>SIC</td>
+                            <td>55512</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Alessandria</th>
+                            <td>AL</td>
+                            <td>PIE</td>
+                            <td>91059</td>
+                        </tr>
+                    </tbody>
+                </table>   
+            </div>
+            <div class="col-md-6">
+                <p class="lead en visually-hidden">Before starting, you need a csv file with, at least, the first row with "city" and "index" and a second one with values. You can see that you can provide more than two colums with different order. Now you can add latitude and longitude with geocoder. The result file should be similar to <a href="../Assets/file.csv" class="text-decoration-none">this</a>.</p>
+                <p class="lead it visually-hidden">Prima d'iniziare, hai bisogno di un file .csv che abbia nella riga d'intestazione almeno "city", la città da cercare, e "index", l'indice che verrà visualizzato in seguito sulla mappa. Possono essere presenti anche altri campi che però non verranno considerati dal programma. Quindi inserendolo all'interno del Geocoder avrai latitudine e longitudine (<a href="../Assets/file.csv" class="text-decoration-none">esempio</a>).</p>
+            </div>
+        </div>
+        <p class="lead en visually-hidden">On the geocoder page, you can check the box to choose for evey query the correct city when there is more than one result. From one instance to another the program waits 2 seconds to comply with API service policies, so it might take a while to get the result.</p>
+        <p class="lead it visually-hidden">Puoi decidere se spuntare l'opzione per la scelta delle città quando viene trovato più di un risultato. Per ogni città cercata il programma aspetta 2 secondi per rispettare le policy del servizio API, per cui per liste lunge potrebbe volerci un po' prima di avere il file</p>
+        <h5 class="mt-2">CSV Fromat File</h5>
+        <p class="lead en visually-hidden">
+            The CSV file from the generator is returned with <b>semicolons</b> as separator. Expecially with commas, if you are using Excel to edit the file, you will not be able to open it immediately as a normal .xml, to make it recognized you can go under data and "text in columns" and follow the guided steps.<br>
+            The map generator takes indifferently commas and semicolons, if you encouner problems let me know.
+        </p>
+        <p class="lead it visually-hidden">
+            Il programma genera a sua volta un csv che ha come separatore i <b>punti e virgola</b>. Se stai editando il file con Excel potrebbe non riconoscere subito il separatore, per farlo riconoscere puoi andare sotto la tab "Dati" in alto e usare lo strumento  "Testo in colonne" e seguire la procedura.<br>
+            L'editor per la mappa riconosce indistintamente virgole e punti e virgola.
+        </p>
+        <h3 class="mt-2">Mapper</h3>
+        <p class="lead en visually-hidden">This tool provide a simple way to plot points on a map. You can define the dimension of each point from the index and decide a factor index to scale up or down.</p>
+        <p class="lead it visually-hidden">Lo strumento fornisce un semplice modo per generare una mappa con punti di dimensione proporzionale all'indice (index) dato. Si può anche definire un fattore di scala (correction_index) per rendere la visualizzazione ottimale. Il risultato "radius" è il raggio in metri del cerchio visualizzato sulla mappa.</p>
+        <p class="text-center lead">radius = listCity[i].index * correction_index;</p>
+    </div>
+    <div id="map_normal" class="z-0 map" style="height: 70%;"></div>
+    <p class="p-1 fw-light en visually-hidden">The example here refers to the population of the principal cities in Italy - the border color is not implemented yet</p>
+    <p class="p-1 fw-light it visually-hidden">L'esempio si riferisce alla popolazione delle principali città italiane - lo riempimento colorato non è implementato</p>
+    <div class="container mt-2 mb-3">
+        <p class="lead en visually-hidden">You can use the logarithmic scale to plot data where values have very large differences in weight.</p>
+        <p class="lead it visually-hidden">È possibile utilizzare la scala logaritmica per visualizzare meglio dati con una grande differenza di valori</p>
+        <p class="text-center lead">radius = Math.log(Math.abs(listCity[i].index)) * correction_index * 10;</p>
+    </div>
+    <div id="map_logarithmic" class="z-0 map" style="height: 70%;"></div>
+    <div class="container">
+        <p class="lead mt-2 mb-3 en visually-hidden">You can also provide negative indexes and they will be plot red insted of green. Right now you can't choose other colors but it will be implemented soon.</p>
+        <p class="lead mt-2 mb-3 it visually-hidden">Valori negativi generano punti rossi sulla mappa. Prossimamente sarà possibile stabilire il colore attraverso un campo aggiuntivo all'interno del file.</p>
+    </div>
+    <div id="map_negative" class="z-0 map" style="height: 70%;"></div>
+    <p class="p-1 fw-light en visually-hidden">*This example is maded with js, not from .csv</p>
+    <p class="p-1 fw-light it visually-hidden">*questo esempio è rappresentativo - non è generato dal file ma da codice</p>
+    <div class="container">
+        <p class="lead en visually-hidden">If something goes wrong or you find a bug, please let me know with the conctact form providing the informations to reproduce the problem so I can fix it!<br>If you are a programmer you can find the repository on my GitHub page, I know that my coding skills suck and it's difficult to read, I'm sorry.</p>
+        <p class="lead it visually-hidden">Se qualcosa non dovesse funzionare come atteso o fossero riscontrati bug, per favore, contattami attraverso il form fornendo le informazioni per poter riprodurre l'errore e risolverlo.<br>Se sai programmare, puoi trovare tutto il codice nel repository di GitHub. <i>Disclaimer</i>: non sono un programmatore e il codice non è perfetto, per cui da leggere sarà piuttosto difficile, sorry.</p>
+    </div>
+    <footer class="text-center">
+        <a href="contact.html" class="text-decoration-none p-2"><i class="fa-solid fa-envelope fa-lg" style="color: #1e3050;"></i></a>
+        <a href="" target="_blank" class="text-decoration-none p-2"><i class="fa-brands fa-github fa-lg" style="color: #1e3050;"></i></a>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="module" src="../Scripts/example.js"></script>
+    <script>
+        let userLang = navigator.language || navigator.userLanguage;
+        changeLanguage();
+        function changeLanguage(){
+            if (userLang == "it-IT"){
+                let english = document.getElementsByClassName('en');
+                let italian = document.getElementsByClassName('it');
+                for (let i = 0; i < english.length; i++) {
+                    english[i].classList.add('visually-hidden');
+                    italian[i].classList.remove("visually-hidden")
+                }
+            }
+            else {
+                let selection = document.querySelector('#langSelector option:nth-child(2)');
+                selection.selected = true;
+                let english = document.getElementsByClassName('en');
+                let italian = document.getElementsByClassName('it');
+                for (let i = 0; i < english.length; i++) {
+                    english[i].classList.remove('visually-hidden');
+                    italian[i].classList.add("visually-hidden")
+                }
+            }
+        }
+    </script>
+</body>
+</html>
