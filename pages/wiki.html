@@ -81,16 +81,71 @@
         <p class="text-center lead">radius = Math.log(Math.abs(listCity[i].index)) * correction_index * 10;</p>
     </div>
     <div id="map_logarithmic" class="z-0 map" style="height: 70%;"></div>
-    <div class="container">
+    <div class="container mt-3">
+        <h5 class="en visually-hidden">Negatives values</h5>
+        <h5 class="it visually-hidden">Valori negativi</h5>
         <p class="lead mt-2 mb-3 en visually-hidden">You can also provide negative indexes and they will be plot red insted of green. Right now you can't choose other colors but it will be implemented soon.</p>
         <p class="lead mt-2 mb-3 it visually-hidden">Valori negativi generano punti rossi sulla mappa. Prossimamente sarà possibile stabilire il colore attraverso un campo aggiuntivo all'interno del file.</p>
     </div>
     <div id="map_negative" class="z-0 map" style="height: 70%;"></div>
     <p class="p-1 fw-light en visually-hidden">*This example is maded with js, not from .csv</p>
     <p class="p-1 fw-light it visually-hidden">*questo esempio è rappresentativo - non è generato dal file ma da codice</p>
-    <div class="container">
+    <div class="container mt-3">
+        <h5 class="en visually-hidden">Colors and pins</h5>
+        <h5 class="it visually-hidden">Colori e pin</h5>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">city</th>
+                        <th>lat</th>
+                        <th>lon</th>
+                        <th scope="col">index</th>
+                        <th scope="col">color</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Torino</th>
+                            <td>45.0168826</td>
+                            <td>7.7499491</td>
+                            <td>x</td>
+                            <td>violet</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Pecetto Torinese</th>
+                            <td>45.0168826</td>
+                            <td>7.7499491</td>
+                            <td>4040</td>
+                            <td>#FFE156</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Pino Torinese</th>
+                            <td>45.039547</td>
+                            <td>7.777125</td>
+                            <td>8380</td>
+                            <td>#0000cc</td>
+                        </tr>
+                    </tbody>
+                </table>   
+            </div>
+            <div class="col-lg-6 oreder-lg-first">
+                <p class="lead en visually-hidden">You can edit the color of the circle adding a new column called "color" specifying for each enter a hex value (# is required) of the color that you want. Leaving a empty space, you will have the default color, so green for the positives and red for the negatives indexies</p>
+                <p class="lead it visually-hidden">Per cambiare il colore sarà necessario aggiungere una colonna "color". Ad ogni riga sarà necessario specificare l'hex (esadecimale - # è richiesto) del colore necessario alla circonferenza. Lasciando lo spazio vuoto, saranno presi i colori di default, quindi verde per i valori positivi e rosso per quelli negativi</p>
+            </div>
+        </div>
+        <div class="oreder-lg-first">
+            <p class="lead en visually-hidden">You can add a pin instead of a circumference by replacing a value index with an "x". You can choose between 9 different colors (blue, gold, red, green, orange, yellow, violet, grey, black) [<a href="https://github.com/pointhi/leaflet-color-markers#leaflet-color-markers" class="text-decoration-none" target="_blank">more</a>]. If you want to add a pin on an existing circle, you can simply add a new entry with x.</p>
+            <p class="lead it visually-hidden">Inserendo una "x" come valore d'index si può ottenere un pin al posto del cerchio. Si può scegliere tra 9 colori (blue, gold, red, green, orange, yellow, violet, grey, black) [<a href="https://github.com/pointhi/leaflet-color-markers#leaflet-color-markers" class="text-decoration-none" target="_blank">maggiori info</a>]. Se si desidera aggiungere un pin sopra una circonferenza basterà semplicemente ripetere l'inserimento, una volta con l'index e una con la x.</p>
+        </div>
+    </div>
+    <div id="map_color" class="z-0 map" style="height: 50%;"></div>
+
+
+    <div class="container mt-3">
         <p class="lead en visually-hidden">If something goes wrong or you find a bug, please let me know with the conctact form providing the informations to reproduce the problem so I can fix it!<br>If you are a programmer you can find the repository on my GitHub page, I know that my coding skills suck and it's difficult to read, I'm sorry.</p>
-        <p class="lead it visually-hidden">Se qualcosa non dovesse funzionare come atteso o fossero riscontrati bug, per favore, contattami attraverso il form fornendo le informazioni per poter riprodurre l'errore e risolverlo.<br>Se sai programmare, puoi trovare tutto il codice nel repository di GitHub. <i>Disclaimer</i>: non sono un programmatore e il codice non è perfetto, per cui da leggere sarà piuttosto difficile, sorry.</p>
+        <p class="lead it visually-hidden">Se qualcosa non dovesse funzionare come atteso o fossero riscontrati bug, per favore, contattami attraverso il form fornendo le informazioni per poter riprodurre l'errore e risolverlo.<br>Se sai programmare, puoi trovare tutto il codice nel repository di GitHub.<br><i>Disclaimer</i>: non sono un programmatore, per cui lo script da leggere sarà piuttosto difficile, sorry.</p>
     </div>
     <footer class="text-center">
         <a href="contact.html" class="text-decoration-none p-2"><i class="fa-solid fa-envelope fa-lg" style="color: #1e3050;"></i></a>
