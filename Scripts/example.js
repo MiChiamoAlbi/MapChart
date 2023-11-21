@@ -15,7 +15,7 @@ function cities(listCity){
             fillOpacity: 0.5,
             radius: listCity[i].index/30
         }).addTo(layer_normal);
-        circle_normal.bindPopup(listCity[i].city);
+        circle_normal.bindPopup(listCity[i].city + "<br>" + listCity[i].index);
 
         let circle_logarithmic = L.circle([listCity[i].lat, listCity[i].lon], {
             color: 'green',
@@ -23,7 +23,7 @@ function cities(listCity){
             fillOpacity: 0.5,
             radius: Math.log(Math.abs(listCity[i].index)) * 2000
         }).addTo(layer_logarithmic);
-        circle_logarithmic.bindPopup(listCity[i].city);
+        circle_logarithmic.bindPopup(listCity[i].city + "<br>" + listCity[i].index);
     }
 };
 
@@ -92,12 +92,11 @@ let listCity = fetch("../Assets/files/file.csv")
 shadow();
 
 const map_negative = L.map('map_negative').setView([45.047861900906405, 7.718819447558779], 11);
-
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetmap</a>'
 }).addTo(map_negative);
-
+map_negative.scrollWheelZoom.disable();
 let circle_green = L.circle([45.01891446031013, 7.7501077093002495], {
     color: 'green',
     fillColor: '#33ff00',
@@ -112,3 +111,34 @@ let circle_red = L.circle([45.0677551,7.6824892], {
     radius: 3000
 }).addTo(map_negative);
 circle_red.bindPopup('TORINO');
+
+const map_color = L.map('map_color').setView([45.047861900906405, 7.718819447558779], 12);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetmap</a>'
+}).addTo(map_color);
+map_color.scrollWheelZoom.disable();
+let circle_yellow = L.circle([45.0168826, 7.7499491], {
+    color: '#FFE156',
+    fillColor: '#FFE156',
+    fillOpacity: 0.5,
+    radius: 404
+}).addTo(map_color);
+circle_yellow.bindPopup('Pecetto Torinese');
+let circle_blue = L.circle([45.039547,7.777125], {
+    color: '#0000cc',
+    fillColor: '#0000cc',
+    fillOpacity: 0.5,
+    radius: 838
+}).addTo(map_color);
+circle_blue.bindPopup('Pino Torinese');
+
+let pin = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-'+'violet'+'.png',
+    //shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+L.marker([45.0677551,7.6824892], {icon: pin}).addTo(map_color);
