@@ -44,9 +44,9 @@ async function loopCity(listCity){
 
     for(let i=0; i<Object.keys(listCity).length; i++){
         progressBar.setAttribute('style', 'width: ' + width + '%');
-        console.log(listCity[i].city + " - " + typeof listCity[i].city);
+        //console.log(listCity[i].city + " - " + typeof listCity[i].city + " - " + listCity[i].lat);
 
-        if (typeof listCity[i].city !== 'undefined' && listCity[i].city != 0){
+        if (listCity[i].city !== undefined && listCity[i].city != 0 && listCity[i].lat == undefined){
             let listCityObject = await $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+ listCity[i].city, function(data){
                 return data;
             });
@@ -80,7 +80,7 @@ async function loopCity(listCity){
         width = ((i+1)/Object.keys(listCity).length)*100;
     };
 
-    await new Promise(r => setTimeout(r, 500));
+    //await new Promise(r => setTimeout(r, 500));
     progress.classList.add("visually-hidden");
     return listCity;
 };
@@ -93,7 +93,7 @@ const CSVtoJSON = (data, delimiter = ',') => {
         .map(v => {
             const values = v.replace("\r", "").split(delimiter);
             return titles.reduce((obj, title, index) => {
-                const value = values[index];
+                const value = values[index] === '' ? undefined : values[index];
                 obj[title] = isNaN(value) ? value : +value;
                 return obj;
             }, {});
