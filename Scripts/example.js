@@ -91,6 +91,7 @@ let listCity = fetch("../Assets/files/file.csv")
 
 shadow();
 
+//negative section
 const map_negative = L.map('map_negative').setView([45.047861900906405, 7.718819447558779], 11);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -112,6 +113,7 @@ let circle_red = L.circle([45.0677551,7.6824892], {
 }).addTo(map_negative);
 circle_red.bindPopup('TORINO');
 
+//color section
 const map_color = L.map('map_color').setView([45.047861900906405, 7.718819447558779], 12);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -142,3 +144,85 @@ let pin = new L.Icon({
     shadowSize: [41, 41]
 });
 L.marker([45.0677551,7.6824892], {icon: pin}).addTo(map_color);
+
+//layer section - I'm tired, this is the first thing that came in my mind - sucks? I know
+const map_layer = L.map('map_layer').setView([45.047861900906405, 7.718819447558779], 12);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetmap</a>'
+}).addTo(map_layer);
+let layer_town = L.layerGroup().addTo(map_layer);
+let layer_city = L.layerGroup().addTo(map_layer);
+map_layer.scrollWheelZoom.disable();
+let circle_yellow_town = L.circle([45.0168826, 7.7499491], {
+    color: '#7ED7C1',
+    fillColor: '#7ED7C1',
+    fillOpacity: 0.5,
+    radius: 404
+}).addTo(layer_town);
+circle_yellow.bindPopup('Pecetto Torinese');
+let circle_blue_town = L.circle([45.039547,7.777125], {
+    color: '#F3B664',
+    fillColor: '#F3B664',
+    fillOpacity: 0.5,
+    radius: 838
+}).addTo(layer_town);
+circle_blue.bindPopup('Pino Torinese');
+
+let pin_city = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-'+'red'+'.png',
+    //shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+L.marker([45.0677551,7.6824892], {icon: pin_city}).addTo(layer_city);
+
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', handleCheckboxChange);
+});
+function handleCheckboxChange() {
+    let td = document.querySelectorAll('#td-'+this.id);
+    if(this.id == '1'){
+        if(this.checked == true){
+            layer_city = L.layerGroup().addTo(map_layer);
+            L.marker([45.0677551,7.6824892], {icon: pin_city}).addTo(layer_city);
+            td.forEach(function(item){
+                item.innerHTML = true;
+            })
+        } else{
+            map_layer.removeLayer(layer_city);
+            td.forEach(function(item){
+                item.textContent = false;
+            })
+        }
+    } else {
+        if(this.checked == true){
+            layer_town = L.layerGroup().addTo(map_layer);
+            circle_yellow_town = L.circle([45.0168826, 7.7499491], {
+                color: '#7ED7C1',
+                fillColor: '#7ED7C1',
+                fillOpacity: 0.5,
+                radius: 404
+            }).addTo(layer_town);
+            circle_yellow.bindPopup('Pecetto Torinese');
+            circle_blue_town = L.circle([45.039547,7.777125], {
+                color: '#F3B664',
+                fillColor: '#F3B664',
+                fillOpacity: 0.5,
+                radius: 838
+            }).addTo(layer_town);
+            circle_blue.bindPopup('Pino Torinese');
+            td.forEach(function(item){
+                item.innerHTML = true;
+            })
+        } else {
+            map_layer.removeLayer(layer_town);
+            td.forEach(function(item){
+                item.textContent = false;
+            })
+        }
+    }
+}

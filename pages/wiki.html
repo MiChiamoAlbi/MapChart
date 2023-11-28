@@ -24,6 +24,9 @@
     </div>
     <div class="container mt-3">
         <h1>Wiki page</h1>
+        <p class="lead en visually-hidden">MapChart allows you to create graphs on a map in more detail than Google Sheets or Excel allow. However, first you need to know the coordinates of the positions on which you want to plot the data, the Geocoder does this automatically.</p>
+        <p class="lead it visually-hidden">MapChart permette di creare grafici su una mappa in maniera più dettagliata di quanto permettano Google Fogli o Excel. Prima però è necessario conoscere le coordinate delle posizioni su cui si vuole tracciare i dati, il Geocoder lo fà in maniera automatica.</p>
+        <h3 class="mt-2">Geocoder</h3>
         <div class="row align-items-center">
             <div class="col-md-6 order-last">
                 <table class="table">
@@ -52,40 +55,40 @@
                 </table>   
             </div>
             <div class="col-md-6">
-                <p class="lead en visually-hidden">Before starting, you need a csv file with, at least, the first row with "city" and "index" and a second one with values. You can see that you can provide more than two colums with different order. Now you can add latitude and longitude with geocoder. The result file should be similar to <a href="../Assets/file.csv" class="text-decoration-none">this</a>.</p>
-                <p class="lead it visually-hidden">Prima d'iniziare, hai bisogno di un file .csv che abbia nella riga d'intestazione almeno "city", la città da cercare, e "index", l'indice che verrà visualizzato in seguito sulla mappa. Possono essere presenti anche altri campi che però non verranno considerati dal programma. Quindi inserendolo all'interno del Geocoder avrai latitudine e longitudine (<a href="../Assets/file.csv" class="text-decoration-none">esempio</a>).</p>
+                <p class="en visually-hidden">Before starting, you need a csv file with, at least, the first row with "city" and "index" and a second one with values. You can see that you can provide more than two colums with different order. Now you can add latitude and longitude with geocoder. The result file should be similar to <a href="../Assets/file.csv" class="text-decoration-none">this</a>.</p>
+                <p class="it visually-hidden">Prima d'iniziare, hai bisogno di un file .csv che abbia nella riga d'intestazione almeno "city", la città da cercare, e "index", l'indice che verrà visualizzato in seguito sulla mappa. Possono essere presenti anche altri campi che però non verranno considerati dal programma. Quindi inserendolo all'interno del Geocoder avrai latitudine e longitudine (<a href="../Assets/file.csv" class="text-decoration-none">esempio</a>).</p>
             </div>
         </div>
-        <p class="lead en visually-hidden">On the geocoder page, you can check the box to choose for evey query the correct city when there is more than one result. From one instance to another the program waits 2 seconds to comply with API service policies, so it might take a while to get the result.</p>
-        <p class="lead it visually-hidden">Puoi decidere se spuntare l'opzione per la scelta delle città quando viene trovato più di un risultato. Per ogni città cercata il programma aspetta 2 secondi per rispettare le policy del servizio API, per cui per liste lunge potrebbe volerci un po' prima di avere il file</p>
+        <p class="en visually-hidden">On the geocoder page, you can check the box to choose for evey query the correct city when there is more than one result. From one instance to another the program waits 2 seconds to comply with API service policies, so it might take a while to get the result.</p>
+        <p class="it visually-hidden">Puoi decidere se spuntare l'opzione per la scelta delle città quando viene trovato più di un risultato. Per ogni città cercata il programma aspetta 2 secondi per rispettare le policy del servizio API, per cui per liste lunge potrebbe volerci un po' prima di avere il file</p>
         <h5 class="mt-2">CSV Fromat File</h5>
-        <p class="lead en visually-hidden">
+        <p class="en visually-hidden">
             The CSV file from the generator is returned with <b>semicolons</b> as separator. Expecially with commas, if you are using Excel to edit the file, you will not be able to open it immediately as a normal .xml, to make it recognized you can go under data and "text in columns" and follow the guided steps.<br>
             The map generator takes indifferently commas and semicolons, if you encouner problems let me know.
         </p>
-        <p class="lead it visually-hidden">
+        <p class="it visually-hidden">
             Il programma genera a sua volta un csv che ha come separatore i <b>punti e virgola</b>. Se stai editando il file con Excel potrebbe non riconoscere subito il separatore, per farlo riconoscere puoi andare sotto la tab "Dati" in alto e usare lo strumento  "Testo in colonne" e seguire la procedura.<br>
             L'editor per la mappa riconosce indistintamente virgole e punti e virgola.
         </p>
         <h3 class="mt-2">Mapper</h3>
-        <p class="lead en visually-hidden">This tool provide a simple way to plot points on a map. You can define the dimension of each point from the index and decide a factor index to scale up or down.</p>
-        <p class="lead it visually-hidden">Lo strumento fornisce un semplice modo per generare una mappa con punti di dimensione proporzionale all'indice (index) dato. Si può anche definire un fattore di scala (correction_index) per rendere la visualizzazione ottimale. Il risultato "radius" è il raggio in metri del cerchio visualizzato sulla mappa.</p>
+        <p class="en visually-hidden">This tool provide a simple way to plot points on a map. You can define the dimension of each point from the index and decide a factor index to scale up or down.</p>
+        <p class="it visually-hidden">Lo strumento fornisce un semplice modo per generare una mappa con punti di dimensione proporzionale all'indice (index) dato. Si può anche definire un fattore di scala (correction_index) per rendere la visualizzazione ottimale. Il risultato "radius" è il raggio in metri del cerchio visualizzato sulla mappa.</p>
         <p class="text-center lead">radius = listCity[i].index * correction_index;</p>
     </div>
     <div id="map_normal" class="z-0 map" style="height: 70%;"></div>
     <p class="p-1 fw-light en visually-hidden">The example here refers to the population of the principal cities in Italy - the border color is not implemented yet</p>
     <p class="p-1 fw-light it visually-hidden">L'esempio si riferisce alla popolazione delle principali città italiane - lo riempimento colorato non è implementato</p>
     <div class="container mt-2 mb-3">
-        <p class="lead en visually-hidden">You can use the logarithmic scale to plot data where values have very large differences in weight.</p>
-        <p class="lead it visually-hidden">È possibile utilizzare la scala logaritmica per visualizzare meglio dati con una grande differenza di valori</p>
+        <p class="en visually-hidden">You can use the logarithmic scale to plot data where values have very large differences in weight.</p>
+        <p class="it visually-hidden">È possibile utilizzare la scala logaritmica per visualizzare meglio dati con una grande differenza di valori</p>
         <p class="text-center lead">radius = Math.log(Math.abs(listCity[i].index)) * correction_index * 10;</p>
     </div>
     <div id="map_logarithmic" class="z-0 map" style="height: 70%;"></div>
     <div class="container mt-3">
         <h5 class="en visually-hidden">Negatives values</h5>
         <h5 class="it visually-hidden">Valori negativi</h5>
-        <p class="lead mt-2 mb-3 en visually-hidden">You can also provide negative indexes and they will be plot red insted of green. Right now you can't choose other colors but it will be implemented soon.</p>
-        <p class="lead mt-2 mb-3 it visually-hidden">Valori negativi generano punti rossi sulla mappa. Prossimamente sarà possibile stabilire il colore attraverso un campo aggiuntivo all'interno del file.</p>
+        <p class="mt-2 mb-3 en visually-hidden">You can also provide negative indexes and they will be plot red insted of green. Right now you can't choose other colors but it will be implemented soon.</p>
+        <p class="mt-2 mb-3 it visually-hidden">Valori negativi generano punti rossi sulla mappa. Prossimamente sarà possibile stabilire il colore attraverso un campo aggiuntivo all'interno del file.</p>
     </div>
     <div id="map_negative" class="z-0 map" style="height: 70%;"></div>
     <p class="p-1 fw-light en visually-hidden">*This example is maded with js, not from .csv</p>
@@ -131,21 +134,79 @@
                 </table>   
             </div>
             <div class="col-lg-6 oreder-lg-first">
-                <p class="lead en visually-hidden">You can edit the color of the circle adding a new column called "color" specifying for each enter a hex value (# is required) of the color that you want. Leaving a empty space, you will have the default color, so green for the positives and red for the negatives indexies</p>
-                <p class="lead it visually-hidden">Per cambiare il colore sarà necessario aggiungere una colonna "color". Ad ogni riga sarà necessario specificare l'hex (esadecimale - # è richiesto) del colore necessario alla circonferenza. Lasciando lo spazio vuoto, saranno presi i colori di default, quindi verde per i valori positivi e rosso per quelli negativi</p>
+                <p class="en visually-hidden">You can edit the color of the circle adding a new column called "color" specifying for each enter a hex value (# is required) of the color that you want. Leaving a empty space, you will have the default color, so green for the positives and red for the negatives indexies</p>
+                <p class="it visually-hidden">Per cambiare il colore sarà necessario aggiungere una colonna "color". Ad ogni riga sarà necessario specificare l'hex (esadecimale - # è richiesto) del colore necessario alla circonferenza. Lasciando lo spazio vuoto, saranno presi i colori di default, quindi verde per i valori positivi e rosso per quelli negativi</p>
             </div>
         </div>
-        <div class="oreder-lg-first">
-            <p class="lead en visually-hidden">You can add a pin instead of a circumference by replacing a value index with an "x". You can choose between 9 different colors (blue, gold, red, green, orange, yellow, violet, grey, black) [<a href="https://github.com/pointhi/leaflet-color-markers#leaflet-color-markers" class="text-decoration-none" target="_blank">more</a>]. If you want to add a pin on an existing circle, you can simply add a new entry with x.</p>
-            <p class="lead it visually-hidden">Inserendo una "x" come valore d'index si può ottenere un pin al posto del cerchio. Si può scegliere tra 9 colori (blue, gold, red, green, orange, yellow, violet, grey, black) [<a href="https://github.com/pointhi/leaflet-color-markers#leaflet-color-markers" class="text-decoration-none" target="_blank">maggiori info</a>]. Se si desidera aggiungere un pin sopra una circonferenza basterà semplicemente ripetere l'inserimento, una volta con l'index e una con la x.</p>
+        <div class="">
+            <p class="en visually-hidden">You can add a pin instead of a circumference by replacing a value index with an "x". You can choose between 9 different colors (blue, gold, red, green, orange, yellow, violet, grey, black) [<a href="https://github.com/pointhi/leaflet-color-markers#leaflet-color-markers" class="text-decoration-none" target="_blank">more</a>]. If you want to add a pin on an existing circle, you can simply add a new entry with x.</p>
+            <p class="it visually-hidden">Inserendo una "x" come valore d'index si può ottenere un pin al posto del cerchio. Si può scegliere tra 9 colori (blue, gold, red, green, orange, yellow, violet, grey, black) [<a href="https://github.com/pointhi/leaflet-color-markers#leaflet-color-markers" class="text-decoration-none" target="_blank">maggiori info</a>]. Se si desidera aggiungere un pin sopra una circonferenza basterà semplicemente ripetere l'inserimento, una volta con l'index e una con la x.</p>
         </div>
     </div>
     <div id="map_color" class="z-0 map" style="height: 50%;"></div>
 
+    <div class="container mt-3">
+        <h3>Layers</h3>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">city</th>
+                        <th>lat</th>
+                        <th>lon</th>
+                        <th>layer</th>
+                        <th style="background-color: #d6d6d6">visibility</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Torino</th>
+                            <td>45.0168826</td>
+                            <td>7.7499491</td>
+                            <td>City</td>
+                            <td id="td-1" style="background-color: #d6d6d6">true</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Pecetto Torinese</th>
+                            <td>45.0168826</td>
+                            <td>7.7499491</td>
+                            <td>Town</td>
+                            <td id="td-2" style="background-color: #d6d6d6">true</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Pino Torinese</th>
+                            <td>45.039547</td>
+                            <td>7.777125</td>
+                            <td>Town</td>
+                            <td id="td-2" style="background-color: #d6d6d6">true</td>
+                        </tr>
+                    </tbody>
+                </table>   
+            </div>
+            <div class="col-lg-6">
+                <p class="en visually-hidden">Adding a new column "layer" and for each element giving a name, you can toggle the visibility of groups of datas easily so it more rapid to understand trands. </p>
+                <p class="it visually-hidden">È possibile, inserendo una colonna "layer" e per ogni elemento un nome corrispondente al gruppo che si vuole assegnare, rimuovere ed aggiungere livelli di visibilità.</p>
+            </div>
+        </div>
+    </div>
+    <div class="position-relative start-50 mb-2">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="1" checked>
+            <label class="form-check-label" for="1">City</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="2" checked>
+            <label class="form-check-label" for="2">Town</label>
+        </div> 
+    </div>
+    <div id="map_layer" class="z-0 map" style="height: 50%;"></div>
+    <!-- bisogna fare lo script della mappa e aggiungere alla colonna visibility qualcosa per cui cambi lo stato della tabella quando checkbox ... sarebbe carino rendere più scuro lo sfondo solo dell'ultima colonna -->
+
 
     <div class="container mt-3">
-        <p class="lead en visually-hidden">If something goes wrong or you find a bug, please let me know with the conctact form providing the informations to reproduce the problem so I can fix it!<br>If you are a programmer you can find the repository on my GitHub page, I know that my coding skills suck and it's difficult to read, I'm sorry.</p>
-        <p class="lead it visually-hidden">Se qualcosa non dovesse funzionare come atteso o fossero riscontrati bug, per favore, contattami attraverso il form fornendo le informazioni per poter riprodurre l'errore e risolverlo.<br>Se sai programmare, puoi trovare tutto il codice nel repository di GitHub.<br><i>Disclaimer</i>: non sono un programmatore, per cui lo script da leggere sarà piuttosto difficile, sorry.</p>
+        <p class="en visually-hidden">If something goes wrong or you find a bug, please let me know with the conctact form providing the informations to reproduce the problem so I can fix it!<br>If you are a programmer you can find the repository on my GitHub page, I know that my coding skills suck and it's difficult to read, I'm sorry.</p>
+        <p class="it visually-hidden">Se qualcosa non dovesse funzionare come atteso o fossero riscontrati bug, per favore, contattami attraverso il form fornendo le informazioni per poter riprodurre l'errore e risolverlo.<br>Se sai programmare, puoi trovare tutto il codice nel repository di GitHub.<br><i>Disclaimer</i>: non sono un programmatore, per cui lo script da leggere sarà piuttosto difficile, sorry.</p>
     </div>
     <footer class="text-center">
         <a href="contact.html" class="text-decoration-none p-2"><i class="fa-solid fa-envelope fa-lg" style="color: #1e3050;"></i></a>
